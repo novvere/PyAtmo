@@ -1,0 +1,2 @@
+# PyAtmo
+Python Netatmo scripts
