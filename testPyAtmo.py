@@ -8,8 +8,8 @@ import Netatmo
 def main():
     logging.basicConfig(level=logging.DEBUG)
     netatmo = Netatmo.Netatmo("PyAtmo.conf")   
-    formentor=netatmo.getHomesData("Formentor")
-    netatmo.getHomeStatus(homeId=formentor["id"])
+    home=netatmo.getHomesData()
+    netatmo.getHomeStatus()
 
    
     
