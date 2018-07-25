@@ -85,7 +85,7 @@ class Netatmo:
         response=self.post("homesdata")
 
         for currentHome in response.json()["body"]["homes"]:
-            if(currentHome["name"] == homeName):
+            if(currentHome["name"] == homeName or currentHome["id"]== homeId or currentHome["name"]==self.config["home"]["name"]):
                 self.home=currentHome
                 return currentHome
         
