@@ -8,6 +8,8 @@ import Netatmo
 import time, json
 import pprint
 from colored import fg, bg, attr # sudo pip3 install colored
+import paho.mqtt.publish as publish
+
 
 def main():
     pp = pprint.PrettyPrinter(indent=4)
@@ -22,6 +24,8 @@ def main():
     
     logging.info("getHomesData")
     HomesData = netatmo.getHomesData()
+
+    #pp.pprint(HomesData)
 
     logging.info("getHomesData() modules:")
     for module in HomesData["modules"]:
@@ -54,6 +58,7 @@ def main():
     logging.info("getHomesData() rooms:")
     rooms = HomesData["rooms"]
     
+    
     rooms2 = []
     for room in rooms:
         #pp.pprint(room)
@@ -71,7 +76,7 @@ def main():
     logging.info("getHomeStatus")
     HomeStatus = netatmo.getHomeStatus()
 
-    #pp.pprint(HomeStatus["modules"])
+    #pp.pprint(HomeStatus)
     #print(HomeStatus["modules"])
     
     for module in HomeStatus["modules"]:
@@ -132,6 +137,10 @@ def main():
         if 'open_window' in room:
             print("\topen_window: " + str(room["open_window"]))
             print("\n")
+               
+        topic = "netatmo/%s/%s/therm_measured_temperature" % (netatmo.home["name"], netatmo.getRoomName(room["id"])) 
+        print("payload: " + str(room["therm_measured_temperature"]))
+        publish.single(topic, room["therm_measured_temperature"], hostname=netatmo.config["mqtt"]["server"])
     
     
 if __name__ == "__main__":

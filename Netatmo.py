@@ -153,9 +153,22 @@ class Netatmo:
         params={}
         params["home_id"]=self.home_id
         response=self.postdata("homestatus", data=params)
-        home = response.json()["body"]["home"]
-        
+        home = response.json()["body"]["home"]                
+
         return home
 
     def getHomeModules(self, homeName, homeId=None):
         print("getHomeModules")
+
+
+    def getRoomName(self, roomId):       
+        if(self.home == None):
+            getHomesData()
+
+        for room in self.home["rooms"]:           
+            if(room["id"] == roomId):                      
+                return room["name"]
+            
+
+        
+        
