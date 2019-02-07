@@ -22,6 +22,7 @@ password = <password>
 client_id = <24 length alphanumeric vallue>
 client_secret = <34 length alphanumeric value>
 scope = read_station read_thermostat write_thermostat
+
 [mqtt]
 server = <mqtt server hostname>
 ```
