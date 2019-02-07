@@ -8,7 +8,7 @@ import Netatmo
 import time, json
 import pprint
 from colored import fg, bg, attr # sudo pip3 install colored
-import paho.mqtt.publish as publish
+import paho.mqtt.publish as publish # sudo pip3 install paho-mqtt
 
 
 def main():
